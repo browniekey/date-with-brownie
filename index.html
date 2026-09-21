@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Dinner Date! 🦦</title>
+    <!-- Font Pixel dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --burgundy: #800020;
+            --beige: #F5F5DC;
+            --emerald: #50C878;
+        }
+
+        body {
+            background-color: var(--beige);
+            color: var(--burgundy);
+            font-family: 'Press Start 2P', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #fff8e7;
+            border: 4px solid var(--burgundy);
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px; /* Ukuran medium */
+            box-shadow: 8px 8px 0px var(--emerald);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h1, h2 {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .gif-container {
+            margin: 20px 0;
+            font-size: 50px; /* Hapus ini jika menggunakan gambar asli */
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gif-container img {
+            max-height: 100%;
+            image-rendering: pixelated; /* Mempertahankan efek pixel */
+        }
+
+        button {
+            background-color: var(--emerald);
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            padding: 15px 20px;
+            border: 3px solid var(--burgundy);
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 4px 4px 0px var(--burgundy);
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--burgundy);
+        }
+
+        .options {
+            text-align: left;
+            margin: 0 auto;
+            display: inline-block;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: var(--emerald);
+            transform: scale(1.5);
+            margin-right: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- PAGE 1: Ajakan -->
+        <div id="page1" class="page active">
+            <h2>You received a letter!</h2>
+            <!-- Ganti src di bawah ini dengan gambar/GIF berang-berang kasih surat -->
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/dummy_link_1/giphy.gif" alt="Berang-berang surat" onerror="this.outerHTML='🦦💌🦦'">
+            </div>
+            <h2>Maukah kamu pergi Birthday Dinner Date denganku?</h2>
+            <button onclick="nextPage(2)">Tentu Saja! &gt;</button>
+        </div>
+
+        <!-- PAGE 2: Pilih Jam -->
+        <div id="page2" class="page">
+            <h2>Pilih jam keberangkatan:</h2>
+            <!-- Ganti src dengan GIF berang-berang naik motor -->
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/dummy_link_2/giphy.gif" alt="Berang-berang motor" onerror="this.outerHTML='🛵🦦🦦'">
+            </div>
+            <div class="options">
+                <label><input type="radio" name="time" value="18:30" checked> 18:30 WIB</label><br>
+                <label><input type="radio" name="time" value="19:00"> 19:00 WIB</label>
+            </div>
+            <br>
+            <button onclick="nextPage(3)">Lanjut &gt;</button>
+        </div>
+
+        <!-- PAGE 3: Menu Makanan -->
+        <div id="page3" class="page">
+            <h2>Pilih menu (Chinese Food):</h2>
+            <!-- Ganti src dengan GIF berang-berang di meja makan -->
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/dummy_link_3/giphy.gif" alt="Berang-berang makan" onerror="this.outerHTML='🥢🦦🍲'">
+            </div>
+            <div class="options">
+                <label><input type="checkbox" name="food" value="Birthday Noodle"> Birthday Noodle</label><br>
+                <label><input type="checkbox" name="food" value="Chicken"> Chicken</label><br>
+                <label><input type="checkbox" name="food" value="Beef"> Beef</label><br>
+                <label><input type="checkbox" name="food" value="Seafood"> Seafood</label><br>
+                <label><input type="checkbox" name="food" value="Vegetables"> Vegetables</label>
+            </div>
+            <br>
+            <button onclick="nextPage(4)">Konfirmasi &gt;</button>
+        </div>
+
+        <!-- PAGE 4: Selesai & Kirim WA -->
+        <div id="page4" class="page">
+            <h2>Yay! Can't wait!</h2>
+            <!-- Ganti src dengan GIF berang-berang pelukan -->
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/dummy_link_4/giphy.gif" alt="Berang-berang pelukan" onerror="this.outerHTML='🫂🦦💖'">
+            </div>
+            <p style="font-size: 10px;">Reservasimu sudah siap dikirim.</p>
+            <button onclick="sendWhatsApp()">Kirim ke WhatsApp!</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedTime = "18:30";
+        let selectedFoods = [];
+
+        function nextPage(pageNumber) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Tampilkan halaman tujuan
+            document.getElementById('page' + pageNumber).classList.add('active');
+
+            // Simpan data jika pindah dari halaman 3 ke 4
+            if (pageNumber === 4) {
+                // Ambil jam
+                const timeRadios = document.getElementsByName('time');
+                for (let radio of timeRadios) {
+                    if (radio.checked) {
+                        selectedTime = radio.value;
+                        break;
+                    }
+                }
+                
+                // Ambil makanan
+                const foodCheckboxes = document.getElementsByName('food');
+                selectedFoods = [];
+                for (let checkbox of foodCheckboxes) {
+                    if (checkbox.checked) {
+                        selectedFoods.push(checkbox.value);
+                    }
+                }
+                if (selectedFoods.length === 0) {
+                    selectedFoods = ["Surprise me! (Pilihkan untukku)"];
+                }
+            }
+        }
+
+        function sendWhatsApp() {
+            // GANTI NOMOR WA DI BAWAH INI (gunakan format 62 tanpa +)
+            const waNumber = "6282297772129"; 
+            
+            const message = `Halo! 🦦\nAku menerima undangan Birthday Dinner Date!\n\n🕒 Jam penjemputan: ${selectedTime}\n🍲 Menu pilihan: ${selectedFoods.join(", ")}\n\nSampai jumpa nanti! 💖`;
+            
+            const waLink = `https://wa.me/${6282297772129}?text=${encodeURIComponent(message)}`;
+            window.open(waLink, '_blank');
+        }
+    </script>
+</body>
+</html>
